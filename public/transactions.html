@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transactions</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         table {
             width: 100%;
@@ -155,6 +156,44 @@
         // Initial fetch
         fetchSummary();
         fetchAllTransactions();
+
+        // Visualisations(Graphics)
+        const ctx = document.getElementById('transactionsChart').getContext('2d');
+    const transactionsChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Bank', 'Mobile Money', 'Cash'],
+            datasets: [{
+                label: 'Transaction Amounts',
+                data: [1200, 850, 400],
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)'
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
     </script>
 </body>
 </html>
