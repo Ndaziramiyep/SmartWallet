@@ -5,9 +5,9 @@ It allows users to categorize their expenses, set budgets, and receive notificat
 
 # Key Features:
 
--Track transactions for multiple accounts
--Generate reports for specific date ranges
--Set and monitor budgets with notifications
--Categorize expenses into custom categories and subcategories
--Visual transaction summaries
+-Track transactions for multiple accounts.<br/>
+-Generate reports for specific date ranges.<br/>
+-Set and monitor budgets with notifications.<br/>
+-Categorize expenses into custom categories and subcategories.<br/>
+-Visual transaction summaries.<br/>
 
