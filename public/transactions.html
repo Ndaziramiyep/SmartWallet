@@ -1,0 +1,202 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions</title>
+</head>
+<body>
+    <h1>Transactions</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Account Type</th>
+                <th>Amount</th>
+                <th>Transaction Type</th>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="transactionTable"></tbody>
+    </table>
+    <script>
+        fetch('/transactions')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('transactionTable');
+                data.forEach(transaction => {
+                    const row = `
+                        <tr>
+                            <td>${transaction.id}</td>
+                            <td>${transaction.accountType}</td>
+                            <td>${transaction.amount}</td>
+                            <td>${transaction.transactionType}</td>
+                            <td>${transaction.category}</td>
+                            <td>${transaction.subcategory}</td>
+                            <td>${transaction.date}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            })
+            .catch(error => console.error('Error fetching transactions:', error));
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Transactions</h1>
+
+    <!-- Add Transaction Form -->
+    <form id="transactionForm">
+        <label>Account Type:
+            <select name="accountType" required>
+                <option value="Bank">Bank</option>
+                <option value="Mobile Money">Mobile Money</option>
+                <option value="Cash">Cash</option>
+            </select>
+        </label>
+        <label>Amount: <input type="number" name="amount" required></label>
+        <label>Type:
+            <select name="transactionType" required>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+        </label>
+        <label>Category: <input type="text" name="category" required></label>
+        <label>Subcategory: <input type="text" name="subcategory"></label>
+        <button type="submit">Add Transaction</button>
+    </form>
+
+    <!-- Transactions Table -->
+    <h2>Transaction Summary</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Account Type</th>
+                <th>Transaction Type</th>
+                <th>Total Amount</th>
+            </tr>
+        </thead>
+        <tbody id="summaryTable"></tbody>
+    </table>
+
+    <h2>All Transactions</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Account Type</th>
+                <th>Amount</th>
+                <th>Transaction Type</th>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="allTransactionsTable"></tbody>
+    </table>
+
+    <script>
+        // Fetch summarized transactions
+        function fetchSummary() {
+            fetch('/transactions')
+                .then(response => response.json())
+                .then(data => {
+                    const summaryTable = document.getElementById('summaryTable');
+                    summaryTable.innerHTML = '';
+                    data.forEach(row => {
+                        const tr = `
+                            <tr>
+                                <td>${row.accountType}</td>
+                                <td>${row.transactionType}</td>
+                                <td>${row.totalAmount}</td>
+                            </tr>
+                        `;
+                        summaryTable.innerHTML += tr;
+                    });
+                })
+                .catch(error => console.error('Error fetching summary:', error));
+        }
+
+        // Fetch all individual transactions
+        function fetchAllTransactions() {
+            fetch('/transactions/all')
+                .then(response => response.json())
+                .then(data => {
+                    const allTransactionsTable = document.getElementById('allTransactionsTable');
+                    allTransactionsTable.innerHTML = '';
+                    data.forEach(transaction => {
+                        const tr = `
+                            <tr>
+                                <td>${transaction.id}</td>
+                                <td>${transaction.accountType}</td>
+                                <td>${transaction.amount}</td>
+                                <td>${transaction.transactionType}</td>
+                                <td>${transaction.category}</td>
+                                <td>${transaction.subcategory}</td>
+                                <td>${transaction.date}</td>
+                            </tr>
+                        `;
+                        allTransactionsTable.innerHTML += tr;
+                    });
+                })
+                .catch(error => console.error('Error fetching transactions:', error));
+        }
+
+        // Add new transaction
+        document.getElementById('transactionForm').addEventListener('submit', event => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const transaction = {
+                accountType: formData.get('accountType'),
+                amount: formData.get('amount'),
+                transactionType: formData.get('transactionType'),
+                category: formData.get('category'),
+                subcategory: formData.get('subcategory')
+            };
+
+            fetch('/transactions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(transaction)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    fetchSummary();
+                    fetchAllTransactions();
+                })
+                .catch(error => console.error('Error adding transaction:', error));
+        });
+
+        // Initial fetch
+        fetchSummary();
+        fetchAllTransactions();
+    </script>
+</body>
+</html>

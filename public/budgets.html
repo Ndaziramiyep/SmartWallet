@@ -1,0 +1,86 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget</title>
+</head>
+<body>
+    <h1>Budget Overview</h1>
+    <div id="budgetInfo"></div>
+    <script>
+        fetch('/budget')
+            .then(response => response.json())
+            .then(data => {
+                const budgetInfo = `
+                    <p>Budget Limit: ${data.budget}</p>
+                    <p>Total Spending: ${data.totalSpending}</p>
+                    <p>Status: ${data.notify ? 'Budget Exceeded!' : 'Within Budget'}</p>
+                `;
+                document.getElementById('budgetInfo').innerHTML = budgetInfo;
+            })
+            .catch(error => console.error('Error fetching budget:', error));
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Overview</title>
+</head>
+<body>
+    <h1>Budget Overview</h1>
+
+    <!-- Budget Status -->
+    <div id="budgetInfo"></div>
+
+    <!-- Set Budget Form -->
+    <form id="budgetForm">
+        <label>Set Budget: <input type="number" name="mlimit" required></label>
+        <button type="submit">Update Budget</button>
+    </form>
+
+    <script>
+        // Fetch and display budget status
+        function fetchBudgetStatus() {
+            fetch('/budget/notification')
+                .then(response => response.json())
+                .then(data => {
+                    const budgetInfo = `
+                        <p>Budget Limit: ${data.mlimit}</p>
+                        <p>Total Spending: ${data.totalSpending}</p>
+                        <p>Status: ${data.notify ? 'Budget Exceeded!' : 'Within Budget'}</p>
+                    `;
+                    document.getElementById('budgetInfo').innerHTML = budgetInfo;
+                })
+                .catch(error => console.error('Error fetching budget:', error));
+        }
+
+        // Set budget
+        document.getElementById('budgetForm').addEventListener('submit', event => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const mlimit = formData.get('mlimit');
+
+            fetch('/budget', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mlimit })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    fetchBudgetStatus();
+                })
+                .catch(error => console.error('Error setting budget:', error));
+        });
+
+        // Initial fetch
+        fetchBudgetStatus();
+    </script>
+</body>
+</html>

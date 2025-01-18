@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+</head>
+<body>
+    <h1>Transaction Reports</h1>
+    <form id="reportForm">
+        <label>Start Date: <input type="date" name="startDate" required></label>
+        <label>End Date: <input type="date" name="endDate" required></label>
+        <button type="submit">Generate</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Account Type</th>
+                <th>Amount</th>
+                <th>Transaction Type</th>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="reportTable"></tbody>
+    </table>
+    <script>
+        document.getElementById('reportForm').addEventListener('submit', event => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const query = `?startDate=${formData.get('startDate')}&endDate=${formData.get('endDate')}`;
+            fetch('/reports' + query)
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('reportTable');
+                    tableBody.innerHTML = '';
+                    data.forEach(transaction => {
+                        const row = `
+                            <tr>
+                                <td>${transaction.id}</td>
+                                <td>${transaction.accountType}</td>
+                                <td>${transaction.amount}</td>
+                                <td>${transaction.transactionType}</td>
+                                <td>${transaction.category}</td>
+                                <td>${transaction.subcategory}</td>
+                                <td>${transaction.date}</td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += row;
+                    });
+                })
+                .catch(error => console.error('Error fetching reports:', error));
+        });
+    </script>
+</body>
+</html>
