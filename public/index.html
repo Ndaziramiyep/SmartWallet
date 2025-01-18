@@ -8,6 +8,7 @@
 </head>
 <body>
     <header>
+        <button id="themeToggle">Toggle Light/Dark Mode</button>
         <h1>Welcome to SmartWallet</h1>
         <nav>
             <ul>
@@ -29,5 +30,18 @@
     <footer>
         <p>&copy; 2025 SmartWallet. All rights reserved.</p>
     </footer>
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+    
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            body.classList.toggle('light-theme');
+        });
+    
+        // Set default theme
+        body.classList.add('light-theme');
+    </script>
+    
 </body>
 </html>

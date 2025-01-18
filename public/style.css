@@ -1,14 +1,32 @@
 /* Global Variables (CSS Root) */
 :root {
-    --primary-color: #4CAF50;       /* Main color - Green */
-    --primary-hover: #388E3C;       /* Darker Green for hover */
-    --secondary-color: #2E8B57;     /* Slightly darker green for links */
-    --text-color: #333;             /* Default text color */
-    --background-color: #f9f9f9;    /* Background color for body */
-    --card-background: white;       /* Card/box background color */
-    --shadow-color: rgba(0, 0, 0, 0.1); /* Box-shadow effect */
-    --button-radius: 5px;           /* Button radius for rounded corners */
-    --font-family: 'Arial', sans-serif; /* Global font family */
+    --primary-color-light: #0370a3;
+    --primary-hover-light: #4e8ce1;
+    --secondary-color-light: #e8e4ea;
+    --background-light: #f9f9f9;
+    --text-light: #333;
+
+    --primary-color-dark: #333;
+    --primary-hover-dark: #555;
+    --secondary-color-dark: #888;
+    --background-dark: #121212;
+    --text-dark: #f9f9f9;
+}
+
+body.light-theme {
+    --primary-color: var(--primary-color-light);
+    --primary-hover: var(--primary-hover-light);
+    --secondary-color: var(--secondary-color-light);
+    --background-color: var(--background-light);
+    --text-color: var(--text-light);
+}
+
+body.dark-theme {
+    --primary-color: var(--primary-color-dark);
+    --primary-hover: var(--primary-hover-dark);
+    --secondary-color: var(--secondary-color-dark);
+    --background-color: var(--background-dark);
+    --text-color: var(--text-dark);
 }
 
 /* Body and General Styles */
@@ -123,3 +141,78 @@ main {
         font-size: 1rem;
     }
 }
+
+
+
+/* For transactions   */
+
+/* Visualization and Graphs */
+.chart-container {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+    background: var(--card-background);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px var(--shadow-color);
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: var(--card-background);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--shadow-color);
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+td {
+    font-size: 0.9rem;
+}
+
+tr:hover {
+    background-color: var(--primary-hover);
+    color: white;
+    cursor: pointer;
+}
+
+/* Light/Dark Toggle Button */
+#themeToggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: var(--button-radius);
+    cursor: pointer;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#themeToggle:hover {
+    transform: scale(1.1);
+    background-color: var(--primary-hover);
+}
+
+/* Responsive Charts */
+.chart-container canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
