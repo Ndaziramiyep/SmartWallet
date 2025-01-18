@@ -1,30 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Budget</title>
-</head>
-<body>
-    <h1>Budget Overview</h1>
-    <div id="budgetInfo"></div>
-    <script>
-        fetch('/budget')
-            .then(response => response.json())
-            .then(data => {
-                const budgetInfo = `
-                    <p>Budget Limit: ${data.budget}</p>
-                    <p>Total Spending: ${data.totalSpending}</p>
-                    <p>Status: ${data.notify ? 'Budget Exceeded!' : 'Within Budget'}</p>
-                `;
-                document.getElementById('budgetInfo').innerHTML = budgetInfo;
-            })
-            .catch(error => console.error('Error fetching budget:', error));
-    </script>
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,6 +6,9 @@
     <title>Budget Overview</title>
 </head>
 <body>
+    <ul>
+        <li><a href="/">Go Home</a></li>
+    </ul>
     <h1>Budget Overview</h1>
 
     <!-- Budget Status -->

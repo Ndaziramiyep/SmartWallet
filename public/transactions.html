@@ -20,85 +20,63 @@
         }
     </style>
 </head>
-<body class="light-theme">
-    <!-- Header -->
-    <header>
-        <h1>Transaction Management</h1>
-        <nav>
-            <ul>
-                <li><a href="#summary">Summary</a></li>
-                <li><a href="#add-transaction">Add Transaction</a></li>
-                <li><a href="#all-transactions">All Transactions</a></li>
-            </ul>
-        </nav>
-    </header>
+<body>
+    <h1>Transactions</h1>
 
-    <!-- Light/Dark Theme Toggle -->
-    <button id="themeToggle">Toggle Theme</button>
+    <!-- Add Transaction Form -->
+    <form id="transactionForm">
+        <label>Account Type:
+            <select name="accountType" required>
+                <option value="Bank">Bank</option>
+                <option value="Mobile Money">Mobile Money</option>
+                <option value="Cash">Cash</option>
+            </select>
+        </label>
+        <label>Amount: <input type="number" name="amount" required></label>
+        <label>Type:
+            <select name="transactionType" required>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+        </label>
+        <label>Category: <input type="text" name="category" required></label>
+        <label>Subcategory: <input type="text" name="subcategory"></label>
+        <button type="submit">Add Transaction</button>
+    </form>
 
-    <!-- Form to Add Transaction -->
-    <section id="add-transaction" class="card">
-        <h2>Add Transaction</h2>
-        <form id="transactionForm" class="transaction-form">
-            <label>Account Type:
-                <select name="accountType" required>
-                    <option value="Bank">Bank</option>
-                    <option value="Mobile Money">Mobile Money</option>
-                    <option value="Cash">Cash</option>
-                </select>
-            </label>
-            <label>Amount:
-                <input type="number" name="amount" required>
-            </label>
-            <label>Type:
-                <select name="transactionType" required>
-                    <option value="income">Income</option>
-                    <option value="expense">Expense</option>
-                </select>
-            </label>
-            <label>Category:
-                <input type="text" name="category" required>
-            </label>
-            <label>Subcategory:
-                <input type="text" name="subcategory">
-            </label>
-            <button type="submit">Add Transaction</button>
-        </form>
-    </section>
+    <!-- Transactions Table -->
+    <h2>Transaction Summary</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Account Type</th>
+                <th>Transaction Type</th>
+                <th>Total Amount</th>
+            </tr>
+        </thead>
+        <tbody id="summaryTable"></tbody>
+    </table>
 
-    <!-- Transaction Summary -->
-    <section id="summary" class="transaction-summary">
-        <h2>Transaction Summary</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Account Type</th>
-                    <th>Transaction Type</th>
-                    <th>Total Amount</th>
-                </tr>
-            </thead>
-            <tbody id="summaryTable"></tbody>
-        </table>
-    </section>
+    <h2>All Transactions</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Account Type</th>
+                <th>Amount</th>
+                <th>Transaction Type</th>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="allTransactionsTable"></tbody>
+    </table>
 
-    <!-- All Transactions -->
-    <section id="all-transactions" class="transaction-table">
-        <h2>All Transactions</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Account Type</th>
-                    <th>Amount</th>
-                    <th>Transaction Type</th>
-                    <th>Category</th>
-                    <th>Subcategory</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody id="allTransactionsTable"></tbody>
-        </table>
-    </section>
+    <!-- Visualisation-->
+    <div style="width: 800px; height: 500px; margin: auto;">
+        <canvas id="transactionsChart"></canvas>
+    </div>
     
 
 
