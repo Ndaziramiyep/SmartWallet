@@ -56,10 +56,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Database Connection
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'wallet',
+    host:process.env.HOST_NAME,
+    user:process.env.USER,
+    password:process.env.PASS,
+    database:process.env.DB_NAME
 });
 
 db.connect((err) => {
