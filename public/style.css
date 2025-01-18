@@ -1,39 +1,34 @@
-/* Basic Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Global Variables (CSS Root) */
+:root {
+    --primary-color: #4CAF50;       /* Main color - Green */
+    --primary-hover: #388E3C;       /* Darker Green for hover */
+    --secondary-color: #2E8B57;     /* Slightly darker green for links */
+    --text-color: #333;             /* Default text color */
+    --background-color: #f9f9f9;    /* Background color for body */
+    --card-background: white;       /* Card/box background color */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Box-shadow effect */
+    --button-radius: 5px;           /* Button radius for rounded corners */
+    --font-family: 'Arial', sans-serif; /* Global font family */
 }
 
-/* Global Styles */
+/* Body and General Styles */
 body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f9f9f9;
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--background-color);
     padding: 20px;
+    margin: 0;
 }
 
 h1, h2 {
-    color: #4CAF50;
+    color: var(--primary-color);
 }
 
-a {
-    text-decoration: none;
-    color: #4CAF50;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: #2E8B57;
-}
-
-/* Header Styles */
+/* Header and Navigation Styles */
 header {
     text-align: center;
     padding: 20px;
-    background-color: #4CAF50;
+    background-color: var(--primary-color);
     color: white;
     border-radius: 8px;
 }
@@ -55,53 +50,54 @@ nav ul li {
 
 nav ul li a {
     font-size: 1.2rem;
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.2s ease;
 }
 
-/* Main Section */
+nav ul li a:hover {
+    color: var(--primary-hover);
+    transform: scale(1.1);
+}
+
+/* Buttons and Forms */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--button-radius);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+    transform: scale(1.05);
+}
+
+/* Card and Section Styles */
+.card {
+    background-color: var(--card-background);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    margin-bottom: 20px;
+}
+
+/* Main Content Section */
 main {
     margin-top: 30px;
     text-align: center;
 }
 
 .intro {
-    background-color: white;
+    background-color: var(--card-background);
     padding: 40px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.intro h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-}
-
-.intro p {
-    font-size: 1.2rem;
-    color: #666;
-}
-
-/* Footer Styles */
-footer {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 0.9rem;
-    color: #666;
-}
-
-/* Button and Form Styles */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #388E3C;
+    box-shadow: 0 2px 5px var(--shadow-color);
 }
 
 /* Responsive Design */
@@ -115,8 +111,8 @@ button:hover {
         margin: 10px 0;
     }
 
-    .intro {
-        padding: 20px;
+    .card {
+        padding: 15px;
     }
 
     .intro h2 {
