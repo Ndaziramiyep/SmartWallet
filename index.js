@@ -5,7 +5,7 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3306;
 require('dotenv').config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
