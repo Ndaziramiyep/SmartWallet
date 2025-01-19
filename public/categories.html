@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Transaction Categories</title>
     <style>
         table {
@@ -19,10 +18,11 @@
             background-color: #f4f4f4;
         }
     </style>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
     <header>
-    <h1>Transaction Categories</h1>
     <nav>
         <ul>
          <li><a href="/index.html">Home</a></li>
@@ -31,8 +31,10 @@
          <li><a href="/reports.html">Report</a></li>
         </ul>
     </nav>
+    <h1>Transaction Categories</h1>
     </header>
     <!-- Transactions by Category -->
+    <section class="card centered-table">
     <h2>Transactions Grouped by Category</h2>
     <table>
         <thead>
@@ -45,8 +47,9 @@
         </thead>
         <tbody id="categoryTable"></tbody>
     </table>
-
+ </section>
     <!-- Add New Transaction -->
+     <section class="card">
     <h2>Add a New Transaction</h2>
     <form id="transactionForm">
         <label>Account Type:
@@ -67,7 +70,7 @@
         <label>Subcategory: <input type="text" name="subcategory"></label>
         <button type="submit">Add Transaction</button>
     </form>
-
+ </section>
     <script>
         // Fetch transactions by category
         function fetchTransactionsByCategory() {
