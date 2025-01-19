@@ -142,49 +142,58 @@ main {
     }
 }
 
-/* Transactions Page Specific Styles */
+/* ------------------ Transactions Page Specific Styles ---------------------- */
 
-/* Form Styles */
-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: space-between;
-}
-
-.form-group {
-    flex: 1 1 calc(50% - 20px);
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
+    min-height: 100vh;
 }
 
-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: var(--text-color);
-}
-
-input, select, button {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid var(--shadow-color);
-    border-radius: var(--button-radius);
-}
-
-button {
+/* Header */
+header {
+    text-align: center;
+    padding: 20px;
     background-color: var(--primary-color);
     color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    border-radius: 8px;
 }
 
-button:hover {
-    background-color: var(--primary-hover);
-    transform: scale(1.05);
+header h1 {
+    font-size: 2.5rem;
 }
 
-/* Table Styles */
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--primary-hover);
+}
+
+/* Table */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -197,7 +206,6 @@ table {
 thead {
     background-color: var(--primary-color);
     color: white;
-    font-weight: bold;
 }
 
 th, td {
@@ -214,15 +222,33 @@ tbody tr:nth-child(even) {
     background-color: var(--card-background);
 }
 
-/* Chart Container Styles */
+/* Chart Section */
+.chart-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
 .chart-container {
-    margin: 20px auto;
-    width: 80%;
-    max-width: 600px;
+    flex: 1 1 48%;
+    background-color: var(--card-background);
+    padding: 15px;
+    border-radius: var(--button-radius);
+    box-shadow: 0 2px 5px var(--shadow-color);
 }
 
 canvas {
-    display: block;
     width: 100%;
     height: auto;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    margin-top: auto;
+    font-size: 0.9rem;
 }
