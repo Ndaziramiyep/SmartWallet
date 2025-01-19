@@ -31,6 +31,22 @@ Node.js with expres: The latest stable version of Node.js.</li>
 <li>
 npm: Node Package Manager (comes with Node.js).</li>
 <li>
-MySQL: A MySQL database [clever cloud ] 
+MySQL: A MySQL database [clever cloud ] .
+
+# Folder Structure
+
+smartwallet/
+├── public/                # Static files (HTML, CSS, JS)
+│   ├── index.html         # Homepage
+│   ├── transactions.html  # Transactions Page
+│   ├── reports.html       # Reports Page
+│   ├── budget.html        # Budget Page
+│   └── style.css          # Main styles
+├── views/                 # EJS templates
+│   └── index.ejs          # Homepage template
+├── app.js                 # Main application logic (Node.js)
+├── package.json           # Dependencies and scripts
+└── README.md              # Project documentation
+
 </li>
 <ul>
