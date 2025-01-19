@@ -7,7 +7,7 @@
     <title>Budget Overview</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        footer{
+        footer {
             background-color: #4CAF50;
         }
     </style>
@@ -15,25 +15,25 @@
 
 <body>
     <header>
-    <nav>
-        <ul>
-         <li><a href="/index.html">Home</a></li>
-         <li><a href="/transactions.html">Transactions</a></li>
-         <li><a href="/reports.html">Report</a></li>
-         <li><a href="/categories.html">Categories</a></li>
-        </ul>
-    </nav>
-    <h1>Budget Overview</h1>
-</header>
+        <nav>
+            <ul>
+                <li><a href="https://smartwallet.onrender.com/index.html">Home</a></li>
+                <li><a href="https://smartwallet.onrender.com/transactions.html">Transactions</a></li>
+                <li><a href="https://smartwallet.onrender.com/reports.html">Report</a></li>
+                <li><a href="https://smartwallet.onrender.com/categories.html">Categories</a></li>
+            </ul>
+        </nav>
+        <h1>Budget Overview</h1>
+    </header>
     <!-- Budget Status -->
-     <div class="card">
-    <div id="budgetInfo"></div>
+    <div class="card">
+        <div id="budgetInfo"></div>
 
-    <!-- Set Budget Form -->
-    <form id="budgetForm">
-        <label>Set Budget: <input type="number" name="mlimit" required></label>
-        <button type="submit">Update Budget</button>
-    </form>
+        <!-- Set Budget Form -->
+        <form id="budgetForm">
+            <label>Set Budget: <input type="number" name="mlimit" required></label>
+            <button type="submit">Update Budget</button>
+        </form>
     </div>
 
     <footer>
@@ -42,7 +42,7 @@
     <script>
         // Fetch and display budget status
         function fetchBudgetStatus() {
-            fetch('/budget/notification')
+            fetch('https://smartwallet.onrender.com/budget/notification')
                 .then(response => response.json())
                 .then(data => {
                     const budgetInfo = `
@@ -61,7 +61,7 @@
             const formData = new FormData(event.target);
             const mlimit = formData.get('mlimit');
 
-            fetch('/budget', {
+            fetch('https://smartwallet.onrender.com/budget', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ mlimit })

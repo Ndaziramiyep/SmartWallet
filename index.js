@@ -7,15 +7,17 @@ const app = express();
 app.use(express.json());
 const PORT = process.env.PORT || 3306;
 require('dotenv').config();
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+    extended: true
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Database Connection
 const db = mysql.createConnection({
-    host:process.env.HOST_NAME,
-    user:process.env.USER_NAME,
-    password:process.env.PASSWORD,
-    database:process.env.DB_NAME
+    host: process.env.HOST_NAME,
+    user: process.env.USER_NAME,
+    password: process.env.PASSWORD,
+    database: process.env.DB_NAME
 });
 
 db.connect((err) => {
@@ -32,18 +34,27 @@ app.get('https://smartwallet.onrender.com/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Transactions Page
-
 // Add a new transaction
 app.post('https://smartwallet.onrender.com/transactions', (req, res) => {
-    const { accountType, amount, transactionType, category, subcategory } = req.body;
+    const {
+        accountType,
+        amount,
+        transactionType,
+        category,
+        subcategory
+    } = req.body;
     const query = `INSERT INTO transaction (accountType, amount, transactionType, category, subcategory, date)
                    VALUES (?, ?, ?, ?, ?, NOW())`;
     db.query(query, [accountType, amount, transactionType, category, subcategory], (err, result) => {
         if (err) {
-            return res.status(500).json({ message: 'Error adding transaction', error: err });
+            return res.status(500).json({
+                message: 'Error adding transaction',
+                error: err
+            });
         }
-        res.json({ message: 'Transaction added successfully' });
+        res.json({
+            message: 'Transaction added successfully'
+        });
     });
 });
 
@@ -55,7 +66,10 @@ app.get('https://smartwallet.onrender.com/transactions', (req, res) => {
                    ORDER BY accountType, transactionType`;
     db.query(query, (err, results) => {
         if (err) {
-            return res.status(500).json({ message: 'Error fetching transactions', error: err });
+            return res.status(500).json({
+                message: 'Error fetching transactions',
+                error: err
+            });
         }
         res.json(results);
     });
@@ -66,7 +80,10 @@ app.get('https://smartwallet.onrender.com/transactions/all', (req, res) => {
     const query = 'SELECT * FROM transaction ORDER BY date DESC';
     db.query(query, (err, results) => {
         if (err) {
-            return res.status(500).json({ message: 'Error fetching transactions', error: err });
+            return res.status(500).json({
+                message: 'Error fetching transactions',
+                error: err
+            });
         }
         res.json(results);
     });
@@ -75,11 +92,17 @@ app.get('https://smartwallet.onrender.com/transactions/all', (req, res) => {
 
 // Reports Page (by date range)
 app.get('https://smartwallet.onrender.com/reports', (req, res) => {
-    const { startDate, endDate } = req.query;
+    const {
+        startDate,
+        endDate
+    } = req.query;
     const query = 'SELECT * FROM transaction WHERE date BETWEEN ? AND ?';
     db.query(query, [startDate, endDate], (err, results) => {
         if (err) {
-            return res.status(500).json({ message: 'Database query error', error: err });
+            return res.status(500).json({
+                message: 'Database query error',
+                error: err
+            });
         }
         res.json(results);
     });
@@ -90,7 +113,10 @@ app.get('https://smartwallet.onrender.com/categories', (req, res) => {
     const query = 'SELECT DISTINCT category, subcategory FROM transaction ORDER BY category, subcategory';
     db.query(query, (err, results) => {
         if (err) {
-            return res.status(500).json({ message: 'Error fetching categories', error: err });
+            return res.status(500).json({
+                message: 'Error fetching categories',
+                error: err
+            });
         }
         res.json(results);
     });
@@ -98,14 +124,25 @@ app.get('https://smartwallet.onrender.com/categories', (req, res) => {
 
 // Add a new transaction with category and subcategory
 app.post('https://smartwallet.onrender.com/transactions', (req, res) => {
-    const { accountType, amount, transactionType, category, subcategory } = req.body;
+    const {
+        accountType,
+        amount,
+        transactionType,
+        category,
+        subcategory
+    } = req.body;
     const query = `INSERT INTO transaction (accountType, amount, transactionType, category, subcategory, date)
                    VALUES (?, ?, ?, ?, ?, NOW())`;
     db.query(query, [accountType, amount, transactionType, category, subcategory], (err, result) => {
         if (err) {
-            return res.status(500).json({ message: 'Error adding transaction', error: err });
+            return res.status(500).json({
+                message: 'Error adding transaction',
+                error: err
+            });
         }
-        res.json({ message: 'Transaction added successfully' });
+        res.json({
+            message: 'Transaction added successfully'
+        });
     });
 });
 
@@ -119,7 +156,10 @@ app.get('https://smartwallet.onrender.com/transactions/by-category', (req, res) 
     `;
     db.query(query, (err, results) => {
         if (err) {
-            return res.status(500).json({ message: 'Error fetching transactions by category', error: err });
+            return res.status(500).json({
+                message: 'Error fetching transactions by category',
+                error: err
+            });
         }
         res.json(results);
     });
@@ -130,13 +170,20 @@ app.get('https://smartwallet.onrender.com/transactions/by-category', (req, res) 
 
 // Set a budget
 app.post('https://smartwallet.onrender.com/budget', (req, res) => {
-    const { mlimit } = req.body;
+    const {
+        mlimit
+    } = req.body;
     const query = 'INSERT INTO budget (mlimit) VALUES (?) ON DUPLICATE KEY UPDATE mlimit = VALUES(mlimit)';
     db.query(query, [mlimit], (err, result) => {
         if (err) {
-            return res.status(500).json({ message: 'Error setting budget', error: err });
+            return res.status(500).json({
+                message: 'Error setting budget',
+                error: err
+            });
         }
-        res.json({ message: 'Budget updated successfully' });
+        res.json({
+            message: 'Budget updated successfully'
+        });
     });
 });
 
@@ -146,14 +193,24 @@ app.get('https://smartwallet.onrender.com/budget/notification', (req, res) => {
     const spendingQuery = 'SELECT SUM(amount) AS totalSpending FROM transaction WHERE transactionType = "expense"';
 
     db.query(budgetQuery, (err, budgetResults) => {
-        if (err) return res.status(500).json({ message: 'Error fetching budget', error: err });
+        if (err) return res.status(500).json({
+            message: 'Error fetching budget',
+            error: err
+        });
         const mlimit = budgetResults[0]?.mlimit || 0;
 
         db.query(spendingQuery, (err, spendingResults) => {
-            if (err) return res.status(500).json({ message: 'Error fetching spending', error: err });
+            if (err) return res.status(500).json({
+                message: 'Error fetching spending',
+                error: err
+            });
             const totalSpending = spendingResults[0]?.totalSpending || 0;
             const notify = totalSpending > mlimit;
-            res.json({ mlimit, totalSpending, notify });
+            res.json({
+                mlimit,
+                totalSpending,
+                notify
+            });
         });
     });
 });

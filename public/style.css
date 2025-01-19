@@ -38,7 +38,8 @@ body {
     margin: 0;
 }
 
-h1, h2 {
+h1,
+h2 {
     color: white;
 }
 
@@ -151,8 +152,10 @@ main {
 
 body {
     font-family: 'Arial', sans-serif;
-    color: #333; /* Visible dark text */
-    background-color: #f4f4f4; /* Light background for contrast */
+    color: #333;
+    /* Visible dark text */
+    background-color: #f4f4f4;
+    /* Light background for contrast */
     margin: 0;
     padding: 0;
     display: flex;
@@ -164,7 +167,8 @@ body {
 header {
     text-align: center;
     padding: 20px;
-    background-color: #4CAF50; /* Green header */
+    background-color: #4CAF50;
+    /* Green header */
     color: white;
     border-radius: 8px;
 }
@@ -283,7 +287,8 @@ thead {
     color: white;
 }
 
-th, td {
+th,
+td {
     padding: 10px;
     text-align: left;
     border: 1px solid #ddd;
@@ -322,7 +327,8 @@ canvas {
 
 /* Notification */
 .success-message {
-    color: #4CAF50; /* Green for success messages */
+    color: #4CAF50;
+    /* Green for success messages */
     font-weight: bold;
     margin-top: 10px;
     text-align: center;
