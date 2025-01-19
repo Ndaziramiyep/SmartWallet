@@ -333,3 +333,34 @@ footer {
     color: white;
     margin-top: auto;
 }
+
+/* ------------------------------------- Reports Page Specific Styles --------------------------- */
+body.light-theme {
+    --card-background: #fff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme {
+    --card-background: #1f1f1f;
+    --shadow-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Form Section */
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 20px;
+    align-items: center;
+}
+
+button {
+    align-self: end;
+}
+
+.centered-table table {
+    border: 1px solid var(--shadow-color);
+}
+
+footer {
+    background: var(--primary-color);
+}

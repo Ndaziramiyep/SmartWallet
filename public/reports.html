@@ -4,29 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reports</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <li><a href="/">Go Home</a></li>
-    <h1>Transaction Reports</h1>
-    <form id="reportForm">
-        <label>Start Date: <input type="date" name="startDate" required></label>
-        <label>End Date: <input type="date" name="endDate" required></label>
-        <button type="submit">Generate</button>
-    </form>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Account Type</th>
-                <th>Amount</th>
-                <th>Transaction Type</th>
-                <th>Category</th>
-                <th>Subcategory</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody id="reportTable"></tbody>
-    </table>
+<body class="light-theme">
+    <nav>
+        <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/transactions.html">Transactions</a></li>
+            <li><a href="/budget.html">Budget</a></li>
+            <li><a href="/categories.html">Categories</a></li>
+        </ul>
+    </nav>
+    <main>
+        <header>
+            <h1>Transaction Reports</h1>
+        </header>
+        <section class="card">
+            <form id="reportForm">
+                <div class="form-group">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate" name="startDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="endDate">End Date:</label>
+                    <input type="date" id="endDate" name="endDate" required>
+                </div>
+                <button type="submit">Generate</button>
+            </form>
+        </section>
+        <section class="centered-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Account Type</th>
+                        <th>Amount</th>
+                        <th>Transaction Type</th>
+                        <th>Category</th>
+                        <th>Subcategory</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="reportTable"></tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Finance Tracker</p>
+    </footer>
     <script>
         document.getElementById('reportForm').addEventListener('submit', event => {
             event.preventDefault();
