@@ -35,18 +35,18 @@ MySQL: A MySQL database [clever cloud ] .
 
 # Folder Structure
 
-smartwallet/
-├── public/                # Static files (HTML, CSS, JS)
-│   ├── index.html         # Homepage
-│   ├── transactions.html  # Transactions Page
-│   ├── reports.html       # Reports Page
-│   ├── budget.html        # Budget Page
-│   └── style.css          # Main styles
-├── views/                 # EJS templates
-│   └── index.ejs          # Homepage template
-├── app.js                 # Main application logic (Node.js)
-├── package.json           # Dependencies and scripts
-└── README.md              # Project documentation
+smartwallet/<br/>
+├── public/                # Static files (HTML, CSS, JS)<br/>
+│   ├── index.html         # Homepage<br/>
+│   ├── transactions.html  # Transactions Page<br/>
+│   ├── reports.html       # Reports Page<br/>
+│   ├── budget.html        # Budget Page<br/>
+│   └── style.css          # Main styles<br/>
+├── views/                 # EJS templates<br/>
+│   └── index.ejs          # Homepage template<br/>
+├── app.js                 # Main application logic (Node.js)<br/>
+├── package.json           # Dependencies and scripts<br/>
+└── README.md              # Project documentation<br/>
 
 </li>
 <ul>
