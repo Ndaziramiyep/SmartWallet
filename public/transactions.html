@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transactions</title>
-    <link rel="stylesheet" href="style.css"> <!-- Use the centralized style.css -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="transactions-page">
     <header>
         <h1>Transactions</h1>
         <nav>
@@ -21,41 +21,6 @@
 
     <main>
         <!-- Add Transaction Form -->
-        <section class="card">
-            <h2>Add a Transaction</h2>
-            <form id="transactionForm">
-                <div class="form-group">
-                    <label for="accountType">Account Type:</label>
-                    <select name="accountType" id="accountType" required>
-                        <option value="Bank">Bank</option>
-                        <option value="Mobile Money">Mobile Money</option>
-                        <option value="Cash">Cash</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="amount">Amount:</label>
-                    <input type="number" id="amount" name="amount" required>
-                </div>
-                <div class="form-group">
-                    <label for="transactionType">Transaction Type:</label>
-                    <select name="transactionType" id="transactionType" required>
-                        <option value="income">Income</option>
-                        <option value="expense">Expense</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="category">Category:</label>
-                    <input type="text" id="category" name="category" required>
-                </div>
-                <div class="form-group">
-                    <label for="subcategory">Subcategory:</label>
-                    <input type="text" id="subcategory" name="subcategory">
-                </div>
-                <button type="submit">Add Transaction</button>
-            </form>
-        </section>
-
-        <!-- Transactions Table -->
         <section class="card">
             <h2>All Transactions</h2>
             <table>
@@ -73,65 +38,24 @@
                 <tbody id="transactionTable"></tbody>
             </table>
         </section>
+
+        <!-- Charts Section -->
+        <section class="card">
+            <h2>Data Visualization</h2>
+            <div class="chart-container">
+                <canvas id="barChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="pieChart"></canvas>
+            </div>
+        </section>
     </main>
 
     <footer>
         <p>&copy; 2025 SmartWallet. All rights reserved.</p>
     </footer>
 
-    <script>
-        // Fetch and display transactions
-        function fetchTransactions() {
-            fetch('/transactions/all')
-                .then(response => response.json())
-                .then(data => {
-                    const tableBody = document.getElementById('transactionTable');
-                    tableBody.innerHTML = '';
-                    data.forEach(transaction => {
-                        const row = `
-                            <tr>
-                                <td>${transaction.id}</td>
-                                <td>${transaction.accountType}</td>
-                                <td>${transaction.amount}</td>
-                                <td>${transaction.transactionType}</td>
-                                <td>${transaction.category}</td>
-                                <td>${transaction.subcategory || 'N/A'}</td>
-                                <td>${transaction.date}</td>
-                            </tr>
-                        `;
-                        tableBody.innerHTML += row;
-                    });
-                })
-                .catch(error => console.error('Error fetching transactions:', error));
-        }
-
-        // Add new transaction
-        document.getElementById('transactionForm').addEventListener('submit', event => {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const transaction = {
-                accountType: formData.get('accountType'),
-                amount: formData.get('amount'),
-                transactionType: formData.get('transactionType'),
-                category: formData.get('category'),
-                subcategory: formData.get('subcategory')
-            };
-
-            fetch('/transactions', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(transaction)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.message);
-                    fetchTransactions();
-                })
-                .catch(error => console.error('Error adding transaction:', error));
-        });
-
-        // Initial fetch
-        fetchTransactions();
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
