@@ -1,49 +1,3 @@
-// // Backend: Node.js Code
-
-// const express = require('express');
-// const mysql = require('mysql');
-// const path = require('path');
-// const app = express();
-
-// // Middleware
-// app.use(express.json());
-// app.use(express.static(path.join(__dirname, 'public')));
-
-// // Database Connection
-// const db = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: '',
-//     database: 'wallet',
-// });
-
-// db.connect((err) => {
-//     if (err) {
-//         console.error('Database connection error:', err);
-//         process.exit(1);
-//     }
-//     console.log('Connected to MySQL');
-// });
-
-// // API Endpoint to Get Transactions
-// app.get('/api/transactions', (req, res) => {
-//     const query = 'SELECT * FROM transaction';
-//     db.query(query, (err, results) => {
-//         if (err) {
-//             return res.status(500).json({ message: 'Database query error', error: err });
-//         }
-//         res.json(results);
-//     });
-// });
-
-// // Start Server
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//     console.log(`Server running on port ${PORT}`);
-// });
-
-
-
 const express = require('express');
 const mysql = require('mysql');
 const path = require('path');
@@ -51,6 +5,8 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+const PORT = process.env.PORT || 3000;
+require('dotenv').config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -116,17 +72,6 @@ app.get('/transactions/all', (req, res) => {
     });
 });
 
-
-
-// app.get('/transactions', (req, res) => {
-//     const query = 'SELECT * FROM transactions';
-//     db.query(query, (err, results) => {
-//         if (err) {
-//             return res.status(500).json({ message: 'Database query error', error: err });
-//         }
-//         res.json(results);
-//     });
-// });
 
 // Reports Page (by date range)
 app.get('/reports', (req, res) => {
@@ -213,26 +158,7 @@ app.get('/budget/notification', (req, res) => {
     });
 });
 
-
-// app.get('/budget', (req, res) => {
-//     const budgetQuery = 'SELECT * FROM budget LIMIT 1';
-//     const spendingQuery = 'SELECT SUM(amount) AS totalSpending FROM transactions WHERE transactionType = "expense"';
-
-//     db.query(budgetQuery, (err, budgetResults) => {
-//         if (err) return res.status(500).json({ message: 'Database query error', error: err });
-//         const budget = budgetResults[0]?.limit || 0;
-
-//         db.query(spendingQuery, (err, spendingResults) => {
-//             if (err) return res.status(500).json({ message: 'Database query error', error: err });
-//             const totalSpending = spendingResults[0]?.totalSpending || 0;
-//             const notify = totalSpending > budget;
-//             res.json({ budget, totalSpending, notify });
-//         });
-//     });
-// });
-
 // Start Server
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
