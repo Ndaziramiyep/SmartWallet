@@ -201,16 +201,16 @@ tbody tr:nth-child(even) {
 }
 
 /* Charts Section */
-.chart-column {
-    display: flex;
-    flex-direction: column;
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    align-items: center;
+    justify-items: center;
 }
 
 .chart-container {
-    width: 80%;
-    max-width: 500px;
+    width: 100%;
+    max-width: 400px;
     background-color: white;
     padding: 20px;
     border-radius: 8px;
@@ -221,6 +221,7 @@ canvas {
     width: 100%;
     height: auto;
 }
+
 
 /* Notification */
 .success-message {
