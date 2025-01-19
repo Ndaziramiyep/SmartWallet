@@ -1,7 +1,7 @@
 /* Global Variables (CSS Root) */
 :root {
-    --primary-color-light: #0370a3;
-    --primary-hover-light: #4e8ce1;
+    --primary-color-light: #4CAF50;
+    --primary-hover-light: #6ce170;
     --secondary-color-light: #e8e4ea;
     --background-light: #f9f9f9;
     --text-light: #333;
@@ -145,6 +145,7 @@ main {
 /* ------------------ Transactions Page Specific Styles ---------------------- */
 
 /* General Styles */
+
 body {
     font-family: 'Arial', sans-serif;
     color: #333; /* Visible dark text */
@@ -164,6 +165,99 @@ header {
     color: white;
     border-radius: 8px;
 }
+
+/* Adjusted Form Section for Grid Layout */
+.card {
+    background-color: var(--card-background);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 700px;
+}
+
+.card h2 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+input[type="number"],
+input[type="text"],
+select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid var(--primary-color-dark);
+    border-radius: 8px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Full-width button ------------------------------------------------------------------------*/
+button {
+    grid-column: span 3;
+    background-color: var(--primary-color-light);
+    color: white;
+    padding: 12px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--primary-hover-light);
+    transform: scale(1.05);
+}
+
+/* Notification Message */
+.success-message {
+    grid-column: span 3;
+    color: var(--primary-color);
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1rem;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    form {
+        grid-template-columns: 1fr;
+    }
+
+    button {
+        grid-column: span 1;
+    }
+}
+
+
 
 /* Centered Table */
 .centered-table {
