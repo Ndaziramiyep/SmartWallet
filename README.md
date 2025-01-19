@@ -11,3 +11,4 @@ It allows users to categorize their expenses, set budgets, and receive notificat
 -Categorize expenses into custom categories and subcategories.<br/>
 -Visual transaction summaries.<br/>
 
+    // "dev": "nodemon app.js"

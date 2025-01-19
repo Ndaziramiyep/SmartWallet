@@ -39,7 +39,7 @@ body {
 }
 
 h1, h2 {
-    color: var(--primary-color);
+    color: white;
 }
 
 /* Header and Navigation Styles */
@@ -85,6 +85,8 @@ button {
     color: white;
     padding: 10px 20px;
     border: none;
+    width: 30%;
+    margin: auto;
     border-radius: var(--button-radius);
     font-size: 1rem;
     cursor: pointer;
@@ -335,15 +337,7 @@ footer {
 }
 
 /* ------------------------------------- Reports Page Specific Styles --------------------------- */
-body.light-theme {
-    --card-background: #fff;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-}
 
-body.dark-theme {
-    --card-background: #1f1f1f;
-    --shadow-color: rgba(255, 255, 255, 0.1);
-}
 
 /* Form Section */
 form {
