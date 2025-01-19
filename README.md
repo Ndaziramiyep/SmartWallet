@@ -18,7 +18,7 @@ SmartWallet comes with the following key functionalities:<br>
 </ul>
 
 # Live Project:
-<h5><u>Unfortunately there is an issue occurred while setting up online database mysql on <u><i>Clever Cloud</i></u>. It is working properly with its all functionalities remotely.</u></h5><br/> 
+<h3><i>Unfortunately there is an issue occurred while setting up online database mysql on <u><i>Clever Cloud</i></u>. It is working properly with its all functionalities remotely.</i></h3><br/> 
 You can access the live version of the SmartWallet application here:
 <h3><a href='https://smartwallet.onrender.com/index.html' >SmartWallet Live Project</a></h3>
 
