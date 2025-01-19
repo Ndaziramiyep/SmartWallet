@@ -1,12 +1,9 @@
-// Global Variables
-const API_BASE = '/transactions/all';
-
-// Fetch transactions from the backend
+// Fetch and display transactions
 async function fetchTransactions() {
     try {
-        const response = await fetch(API_BASE);
-        const data = await response.json();
-        return data;
+        const response = await fetch('/transactions/all');
+        const transactions = await response.json();
+        populateTransactionTable(transactions);
     } catch (error) {
         console.error('Error fetching transactions:', error);
     }
@@ -32,82 +29,31 @@ function populateTransactionTable(transactions) {
     });
 }
 
-// Render Bar Chart
-function renderBarChart(transactions) {
-    const ctx = document.getElementById('barChart').getContext('2d');
-    const categories = [...new Set(transactions.map(t => t.category))];
-    const categoryTotals = categories.map(category =>
-        transactions
-            .filter(t => t.category === category && t.transactionType === 'expense')
-            .reduce((sum, t) => sum + t.amount, 0)
-    );
+// Add a new transaction
+document.getElementById('transactionForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const transaction = {
+        accountType: formData.get('accountType'),
+        amount: formData.get('amount'),
+        transactionType: formData.get('transactionType'),
+        category: formData.get('category'),
+        subcategory: formData.get('subcategory')
+    };
 
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: categories,
-            datasets: [{
-                label: 'Expenses by Category',
-                data: categoryTotals,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true
-                }
-            }
-        }
-    });
-}
-
-// Render Pie Chart
-function renderPieChart(transactions) {
-    const ctx = document.getElementById('pieChart').getContext('2d');
-    const accountTypes = [...new Set(transactions.map(t => t.accountType))];
-    const accountTotals = accountTypes.map(account =>
-        transactions
-            .filter(t => t.accountType === account && t.transactionType === 'expense')
-            .reduce((sum, t) => sum + t.amount, 0)
-    );
-
-    new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: accountTypes,
-            datasets: [{
-                data: accountTotals,
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                hoverOffset: 4
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top'
-                }
-            }
-        }
-    });
-}
-
-// Initialize Page
-async function initTransactionsPage() {
-    const transactions = await fetchTransactions();
-    populateTransactionTable(transactions);
-    renderBarChart(transactions);
-    renderPieChart(transactions);
-}
-
-// Initialize all pages
-function initPage() {
-    if (document.body.classList.contains('transactions-page')) {
-        initTransactionsPage();
+    try {
+        const response = await fetch('/transactions', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(transaction)
+        });
+        const result = await response.json();
+        document.getElementById('notification').textContent = result.message;
+        fetchTransactions();
+    } catch (error) {
+        console.error('Error adding transaction:', error);
     }
-}
-document.addEventListener('DOMContentLoaded', initPage);
+});
+
+// Initialize page
+document.addEventListener('DOMContentLoaded', fetchTransactions);
