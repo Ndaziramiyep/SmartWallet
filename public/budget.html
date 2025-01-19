@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Overview</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        footer{
+            background-color: #4CAF50;
+        }
+    </style>
 </head>
 
 <body>
@@ -21,6 +26,7 @@
     <h1>Budget Overview</h1>
 </header>
     <!-- Budget Status -->
+     <div class="card">
     <div id="budgetInfo"></div>
 
     <!-- Set Budget Form -->
@@ -28,7 +34,11 @@
         <label>Set Budget: <input type="number" name="mlimit" required></label>
         <button type="submit">Update Budget</button>
     </form>
+    </div>
 
+    <footer>
+        <p>&copy; 2025 SmartWallet. Designed with 💚 for efficient finances.</p>
+    </footer>
     <script>
         // Fetch and display budget status
         function fetchBudgetStatus() {
