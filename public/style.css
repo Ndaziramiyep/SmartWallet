@@ -147,8 +147,8 @@ main {
 /* General Styles */
 body {
     font-family: 'Arial', sans-serif;
-    color: #000; /* All text is black */
-    background-color: var(--background-color);
+    color: #333; /* Visible dark text */
+    background-color: #f4f4f4; /* Light background for contrast */
     margin: 0;
     padding: 0;
     display: flex;
@@ -157,72 +157,64 @@ body {
 }
 
 /* Header */
-header h1 {
-    font-size: 2.5rem;
-    color: white; /* Keep header text white */
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #4CAF50; /* Green header */
+    color: white;
+    border-radius: 8px;
 }
 
-/* Form Styles */
-form {
+/* Centered Table */
+.centered-table {
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.form-group {
-    flex: 1 1 calc(50% - 20px);
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+thead {
+    background-color: #4CAF50;
+    color: white;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #fff;
+}
+
+/* Charts Section */
+.chart-column {
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
-}
-
-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-input, select, button {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid var(--shadow-color);
-    border-radius: var(--button-radius);
-}
-
-button {
-    background-color: var(--primary-color);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-button:hover {
-    background-color: var(--primary-hover);
-    transform: scale(1.05);
-}
-
-/* Success Notification */
-.success-message {
-    color: var(--primary-color);
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-/* Chart Section */
-.chart-row {
-    display: flex;
-    justify-content: space-between;
     gap: 20px;
-    flex-wrap: wrap;
+    align-items: center;
 }
 
-.small-chart {
-    flex: 1 1 48%;
-    max-width: 48%;
-    background-color: var(--card-background);
-    padding: 15px;
-    border-radius: var(--button-radius);
-    box-shadow: 0 2px 5px var(--shadow-color);
+.chart-container {
+    width: 80%;
+    max-width: 500px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 canvas {
@@ -230,12 +222,19 @@ canvas {
     height: auto;
 }
 
+/* Notification */
+.success-message {
+    color: #4CAF50; /* Green for success messages */
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
 /* Footer */
 footer {
     text-align: center;
-    padding: 15px 20px;
-    background-color: var(--primary-color);
+    padding: 15px;
+    background-color: #4CAF50;
     color: white;
     margin-top: auto;
-    font-size: 0.9rem;
 }
