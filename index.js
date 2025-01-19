@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Database Connection
 const db = mysql.createConnection({
     host:process.env.HOST_NAME,
-    user:process.env.USER,
+    user:process.env.USER_NAME,
     password:process.env.PASS,
     database:process.env.DB_NAME
 });
