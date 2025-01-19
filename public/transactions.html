@@ -4,125 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transactions</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css"> <!-- Use the centralized style.css -->
 </head>
 <body>
-    <li><a href="/">Go Home</a></li>
-    <h1>Transactions</h1>
+    <header>
+        <h1>Transactions</h1>
+        <nav>
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/reports.html">Reports</a></li>
+                <li><a href="/budget.html">Budget</a></li>
+                <li><a href="/categories.html">Categories</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- Add Transaction Form -->
-    <form id="transactionForm">
-        <label>Account Type:
-            <select name="accountType" required>
-                <option value="Bank">Bank</option>
-                <option value="Mobile Money">Mobile Money</option>
-                <option value="Cash">Cash</option>
-            </select>
-        </label>
-        <label>Amount: <input type="number" name="amount" required></label>
-        <label>Type:
-            <select name="transactionType" required>
-                <option value="income">Income</option>
-                <option value="expense">Expense</option>
-            </select>
-        </label>
-        <label>Category: <input type="text" name="category" required></label>
-        <label>Subcategory: <input type="text" name="subcategory"></label>
-        <button type="submit">Add Transaction</button>
-    </form>
+    <main>
+        <!-- Add Transaction Form -->
+        <section class="card">
+            <h2>Add a Transaction</h2>
+            <form id="transactionForm">
+                <div class="form-group">
+                    <label for="accountType">Account Type:</label>
+                    <select name="accountType" id="accountType" required>
+                        <option value="Bank">Bank</option>
+                        <option value="Mobile Money">Mobile Money</option>
+                        <option value="Cash">Cash</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" name="amount" required>
+                </div>
+                <div class="form-group">
+                    <label for="transactionType">Transaction Type:</label>
+                    <select name="transactionType" id="transactionType" required>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <input type="text" id="category" name="category" required>
+                </div>
+                <div class="form-group">
+                    <label for="subcategory">Subcategory:</label>
+                    <input type="text" id="subcategory" name="subcategory">
+                </div>
+                <button type="submit">Add Transaction</button>
+            </form>
+        </section>
 
-    <!-- Transactions Table -->
-    <h2>Transaction Summary</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Account Type</th>
-                <th>Transaction Type</th>
-                <th>Total Amount</th>
-            </tr>
-        </thead>
-        <tbody id="summaryTable"></tbody>
-    </table>
+        <!-- Transactions Table -->
+        <section class="card">
+            <h2>All Transactions</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Account Type</th>
+                        <th>Amount</th>
+                        <th>Type</th>
+                        <th>Category</th>
+                        <th>Subcategory</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionTable"></tbody>
+            </table>
+        </section>
+    </main>
 
-    <h2>All Transactions</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Account Type</th>
-                <th>Amount</th>
-                <th>Transaction Type</th>
-                <th>Category</th>
-                <th>Subcategory</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody id="allTransactionsTable"></tbody>
-    </table>
-
-    <!-- Visualisation-->
-    <div style="width: 800px; height: 500px; margin: auto;">
-        <canvas id="transactionsChart"></canvas>
-    </div>
-    
-
+    <footer>
+        <p>&copy; 2025 SmartWallet. All rights reserved.</p>
+    </footer>
 
     <script>
-        // Fetch summarized transactions
-        function fetchSummary() {
-            fetch('/transactions')
-                .then(response => response.json())
-                .then(data => {
-                    const summaryTable = document.getElementById('summaryTable');
-                    summaryTable.innerHTML = '';
-                    data.forEach(row => {
-                        const tr = `
-                            <tr>
-                                <td>${row.accountType}</td>
-                                <td>${row.transactionType}</td>
-                                <td>${row.totalAmount}</td>
-                            </tr>
-                        `;
-                        summaryTable.innerHTML += tr;
-                    });
-                })
-                .catch(error => console.error('Error fetching summary:', error));
-        }
-
-        // Fetch all individual transactions
-        function fetchAllTransactions() {
+        // Fetch and display transactions
+        function fetchTransactions() {
             fetch('/transactions/all')
                 .then(response => response.json())
                 .then(data => {
-                    const allTransactionsTable = document.getElementById('allTransactionsTable');
-                    allTransactionsTable.innerHTML = '';
+                    const tableBody = document.getElementById('transactionTable');
+                    tableBody.innerHTML = '';
                     data.forEach(transaction => {
-                        const tr = `
+                        const row = `
                             <tr>
                                 <td>${transaction.id}</td>
                                 <td>${transaction.accountType}</td>
                                 <td>${transaction.amount}</td>
                                 <td>${transaction.transactionType}</td>
                                 <td>${transaction.category}</td>
-                                <td>${transaction.subcategory}</td>
+                                <td>${transaction.subcategory || 'N/A'}</td>
                                 <td>${transaction.date}</td>
                             </tr>
                         `;
-                        allTransactionsTable.innerHTML += tr;
+                        tableBody.innerHTML += row;
                     });
                 })
                 .catch(error => console.error('Error fetching transactions:', error));
@@ -148,67 +125,13 @@
                 .then(response => response.json())
                 .then(data => {
                     alert(data.message);
-                    fetchSummary();
-                    fetchAllTransactions();
+                    fetchTransactions();
                 })
                 .catch(error => console.error('Error adding transaction:', error));
         });
 
         // Initial fetch
-        fetchSummary();
-        fetchAllTransactions();
-
-        // Visualisations(Graphics)
-        const ctx = document.getElementById('transactionsChart').getContext('2d');
-const transactionsChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Bank', 'Mobile Money', 'Cash'], // Account types
-        datasets: [{
-            label: 'Transaction Amounts',
-            data: [1200, 850, 400], // Corresponding amounts
-            backgroundColor: [
-                'rgba(75, 192, 192, 0.6)', // Bank
-                'rgba(153, 102, 255, 0.6)', // Mobile Money
-                'rgba(255, 159, 64, 0.6)'  // Cash
-            ],
-            borderColor: [
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false, // Allows resizing
-        plugins: {
-            legend: {
-                display: true,
-                position: 'top', // Positions the legend at the top
-            }
-        },
-        scales: {
-            x: {
-                ticks: {
-                    font: {
-                        size: 12 // Smaller font for labels
-                    }
-                }
-            },
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    font: {
-                        size: 12 // Smaller font for values
-                    }
-                }
-            }
-        }
-    }
-});
-
+        fetchTransactions();
     </script>
 </body>
 </html>
