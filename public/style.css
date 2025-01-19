@@ -142,3 +142,74 @@ main {
     }
 }
 
+/* Transactions Page Specific Styles */
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.form-group {
+    flex: 1 1 calc(50% - 20px);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+input, select, button {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid var(--shadow-color);
+    border-radius: var(--button-radius);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+    transform: scale(1.05);
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    border-radius: var(--button-radius);
+    overflow: hidden;
+}
+
+thead {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid var(--shadow-color);
+}
+
+tbody tr:nth-child(odd) {
+    background-color: var(--background-color);
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--card-background);
+}
