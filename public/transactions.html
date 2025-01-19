@@ -20,6 +20,42 @@
     </header>
 
     <main>
+        <!-- Add Transaction Form -->
+        <section class="card">
+            <h2>Add a New Transaction</h2>
+            <form id="transactionForm">
+                <div class="form-group">
+                    <label for="accountType">Account Type:</label>
+                    <select name="accountType" id="accountType" required>
+                        <option value="Bank">Bank</option>
+                        <option value="Mobile Money">Mobile Money</option>
+                        <option value="Cash">Cash</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" name="amount" required>
+                </div>
+                <div class="form-group">
+                    <label for="transactionType">Transaction Type:</label>
+                    <select name="transactionType" id="transactionType" required>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <input type="text" id="category" name="category" required>
+                </div>
+                <div class="form-group">
+                    <label for="subcategory">Subcategory:</label>
+                    <input type="text" id="subcategory" name="subcategory">
+                </div>
+                <button type="submit">Add Transaction</button>
+            </form>
+            <p id="notification" class="success-message"></p>
+        </section>
+
         <!-- Transactions Table -->
         <section class="card">
             <h2>All Transactions</h2>
@@ -41,11 +77,11 @@
 
         <!-- Charts Section -->
         <section class="card chart-row">
-            <div class="chart-container">
+            <div class="chart-container small-chart">
                 <h3>Expenses by Category</h3>
                 <canvas id="barChart"></canvas>
             </div>
-            <div class="chart-container">
+            <div class="chart-container small-chart">
                 <h3>Expenses by Account Type</h3>
                 <canvas id="pieChart"></canvas>
             </div>
