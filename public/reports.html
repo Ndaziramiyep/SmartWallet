@@ -12,10 +12,10 @@
         <header>
         <nav>
            <ul>
-            <li><a href="/index.html">Home</a></li>
-            <li><a href="/transactions.html">Transactions</a></li>
-            <li><a href="/budget.html">Budget</a></li>
-            <li><a href="/categories.html">Categories</a></li>
+            <li><a href="https://smartwallet.onrender.com/index.html">Home</a></li>
+            <li><a href="https://smartwallet.onrender.com/transactions.html">Transactions</a></li>
+            <li><a href="https://smartwallet.onrender.com/budget.html">Budget</a></li>
+            <li><a href="https://smartwallet.onrender.com/categories.html">Categories</a></li>
            </ul>
        </nav>
        <h1>Transaction Reports</h1>
@@ -58,7 +58,7 @@
             event.preventDefault();
             const formData = new FormData(event.target);
             const query = `?startDate=${formData.get('startDate')}&endDate=${formData.get('endDate')}`;
-            fetch('/reports' + query)
+            fetch('https://smartwallet.onrender.com/reports' + query)
                 .then(response => response.json())
                 .then(data => {
                     const tableBody = document.getElementById('reportTable');

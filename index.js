@@ -28,14 +28,14 @@ db.connect((err) => {
 
 // Routes
 // Home Page
-app.get('/', (req, res) => {
+app.get('https://smartwallet.onrender.com/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Transactions Page
 
 // Add a new transaction
-app.post('/transactions', (req, res) => {
+app.post('https://smartwallet.onrender.com/transactions', (req, res) => {
     const { accountType, amount, transactionType, category, subcategory } = req.body;
     const query = `INSERT INTO transaction (accountType, amount, transactionType, category, subcategory, date)
                    VALUES (?, ?, ?, ?, ?, NOW())`;
@@ -48,7 +48,7 @@ app.post('/transactions', (req, res) => {
 });
 
 // Retrieve all transactions grouped by account
-app.get('/transactions', (req, res) => {
+app.get('https://smartwallet.onrender.com/transactions', (req, res) => {
     const query = `SELECT accountType, transactionType, SUM(amount) AS totalAmount
                    FROM transaction
                    GROUP BY accountType, transactionType
@@ -62,7 +62,7 @@ app.get('/transactions', (req, res) => {
 });
 
 // Retrieve all individual transactions
-app.get('/transactions/all', (req, res) => {
+app.get('https://smartwallet.onrender.com/transactions/all', (req, res) => {
     const query = 'SELECT * FROM transaction ORDER BY date DESC';
     db.query(query, (err, results) => {
         if (err) {
@@ -74,7 +74,7 @@ app.get('/transactions/all', (req, res) => {
 
 
 // Reports Page (by date range)
-app.get('/reports', (req, res) => {
+app.get('https://smartwallet.onrender.com/reports', (req, res) => {
     const { startDate, endDate } = req.query;
     const query = 'SELECT * FROM transaction WHERE date BETWEEN ? AND ?';
     db.query(query, [startDate, endDate], (err, results) => {
@@ -86,7 +86,7 @@ app.get('/reports', (req, res) => {
 });
 
 // Get all categories and subcategories
-app.get('/categories', (req, res) => {
+app.get('https://smartwallet.onrender.com/categories', (req, res) => {
     const query = 'SELECT DISTINCT category, subcategory FROM transaction ORDER BY category, subcategory';
     db.query(query, (err, results) => {
         if (err) {
@@ -97,7 +97,7 @@ app.get('/categories', (req, res) => {
 });
 
 // Add a new transaction with category and subcategory
-app.post('/transactions', (req, res) => {
+app.post('https://smartwallet.onrender.com/transactions', (req, res) => {
     const { accountType, amount, transactionType, category, subcategory } = req.body;
     const query = `INSERT INTO transaction (accountType, amount, transactionType, category, subcategory, date)
                    VALUES (?, ?, ?, ?, ?, NOW())`;
@@ -110,7 +110,7 @@ app.post('/transactions', (req, res) => {
 });
 
 // Retrieve transactions grouped by category
-app.get('/transactions/by-category', (req, res) => {
+app.get('https://smartwallet.onrender.com/transactions/by-category', (req, res) => {
     const query = `
         SELECT category, subcategory, SUM(amount) AS totalAmount, transactionType
         FROM transaction
@@ -129,7 +129,7 @@ app.get('/transactions/by-category', (req, res) => {
 // Budget Page
 
 // Set a budget
-app.post('/budget', (req, res) => {
+app.post('https://smartwallet.onrender.com/budget', (req, res) => {
     const { mlimit } = req.body;
     const query = 'INSERT INTO budget (mlimit) VALUES (?) ON DUPLICATE KEY UPDATE mlimit = VALUES(mlimit)';
     db.query(query, [mlimit], (err, result) => {
@@ -141,7 +141,7 @@ app.post('/budget', (req, res) => {
 });
 
 // Check budget notification
-app.get('/budget/notification', (req, res) => {
+app.get('https://smartwallet.onrender.com/budget/notification', (req, res) => {
     const budgetQuery = 'SELECT mlimit FROM budget ORDER BY id DESC LIMIT 1';
     const spendingQuery = 'SELECT SUM(amount) AS totalSpending FROM transaction WHERE transactionType = "expense"';
 
