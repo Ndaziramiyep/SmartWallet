@@ -17,10 +17,10 @@
     <header>
         <nav>
             <ul>
-                <li><a href="https://smartwallet.onrender.com/index.html">Home</a></li>
-                <li><a href="https://smartwallet.onrender.com/transactions.html">Transactions</a></li>
-                <li><a href="https://smartwallet.onrender.com/reports.html">Report</a></li>
-                <li><a href="https://smartwallet.onrender.com/categories.html">Categories</a></li>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/transactions.html">Transactions</a></li>
+                <li><a href="/reports.html">Report</a></li>
+                <li><a href="/categories.html">Categories</a></li>
             </ul>
         </nav>
         <h1>Budget Overview</h1>
@@ -42,7 +42,7 @@
     <script>
         // Fetch and display budget status
         function fetchBudgetStatus() {
-            fetch('https://smartwallet.onrender.com/budget/notification')
+            fetch('/budget/notification')
                 .then(response => response.json())
                 .then(data => {
                     const budgetInfo = `
@@ -61,7 +61,7 @@
             const formData = new FormData(event.target);
             const mlimit = formData.get('mlimit');
 
-            fetch('https://smartwallet.onrender.com/budget', {
+            fetch('/budget', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ mlimit })

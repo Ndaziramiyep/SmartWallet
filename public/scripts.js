@@ -1,5 +1,5 @@
 // Global Variables
-const API_BASE = 'https://smartwallet.onrender.com/transactions/all';
+const API_BASE = '/transactions/all';
 
 // Fetch transactions from the backend
 async function fetchTransactions() {
@@ -143,7 +143,7 @@ document.getElementById('transactionForm').addEventListener('submit', event => {
         subcategory: formData.get('subcategory')
     };
 
-    fetch('https://smartwallet.onrender.com/transactions', {
+    fetch('/transactions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(transaction)

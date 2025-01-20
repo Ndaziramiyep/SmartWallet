@@ -30,10 +30,10 @@
     <header>
         <nav>
             <ul>
-                <li><a href="https://smartwallet.onrender.com/index.html">Home</a></li>
-                <li><a href="https://smartwallet.onrender.com/transactions.html">Transactions</a></li>
-                <li><a href="https://smartwallet.onrender.com/budget.html">Budget</a></li>
-                <li><a href="https://smartwallet.onrender.com/reports.html">Report</a></li>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/transactions.html">Transactions</a></li>
+                <li><a href="/budget.html">Budget</a></li>
+                <li><a href="/reports.html">Report</a></li>
             </ul>
         </nav>
         <h1>Transaction Categories</h1>
@@ -79,7 +79,7 @@
     <script>
         // Fetch transactions by category
         function fetchTransactionsByCategory() {
-            fetch('https://smartwallet.onrender.com/transactions/by-category')
+            fetch('/transactions/by-category')
                 .then(response => response.json())
                 .then(data => {
                     const categoryTable = document.getElementById('categoryTable');
@@ -111,7 +111,7 @@
                 subcategory: formData.get('subcategory')
             };
 
-            fetch('https://smartwallet.onrender.com/transactions', {
+            fetch('/transactions', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(transaction)
